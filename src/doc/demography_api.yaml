@@ -72,7 +72,7 @@ paths:
           content:
             application/xml:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: './person_api.yaml#/components/schemas/Error'
               example:
                 code: 404
                 message: Resource not found

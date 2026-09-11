@@ -1,0 +1,187 @@
+openapi: 3.1.0
+
+info:
+  title: Demography API
+  description: API for statistics from person service
+  version: 1.0.0
+
+servers:
+  - url: 'https://localhost:21211/api/v1'
+    description: Helios
+
+paths:
+
+  /nationality/{nationality}/hair-color/{hair-color}:
+    get:
+      summary: Amount of people with selected HairColor from selected nationality.
+      description: Returns amount of people with selected HairColor from selected nationality
+      operationId: getNationalityHairColor
+
+      parameters:
+        - name: hairColor
+          description: Selected hair color
+          in: query
+          required: true
+          schema:
+            $ref: './person_api.yaml#/components/schemas/HairColor'
+
+        - name: nationality
+          description: Selected nationality
+          in: path
+          required: true
+          schema:
+            $ref: './person_api.yaml#/components/schemas/Country'
+
+      tags:
+        - Demography
+
+      responses:
+
+        '200':
+          description: Successfully found matching people
+          content:
+            application/xml:
+              schema:
+                type: integer
+                format: int32
+                example: 3
+                xml:
+                  name: count
+
+        '400':
+          description: Invalid HairColor or nationality
+          content:
+            application/xml:
+              schema:
+                type: object
+                xml:
+                  name: error
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                    xml:
+                      name: code
+                  message:
+                    type: string
+                    example: Invalid nationality or HairColor
+                    xml:
+                      name: message
+
+        '500':
+          description: Internal Server Error.
+          content:
+            application/xml:
+              schema:
+                type: object
+                xml:
+                  name: error
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                    xml:
+                      name: code
+                  message:
+                    type: string
+                    example: An unexpected error occurred.
+                    xml:
+                      name: message
+        '503':
+          description: Service unavailable
+          content:
+            application/xml:
+              schema:
+                $ref: './person_api.yaml#/components/schemas/Error'
+              example:
+                  code: 503
+                  message: Service is temporarily unavailable
+
+
+  /nationality/{nationality}/eye-color/{eye-color}/percentage:
+    get:
+      summary: Percent of people with selected eye color in nationality
+      description: Returns percent of people with selected eye color from selected nationality
+      operationId: percentOfEyeColor
+
+      parameters:
+        - name: nationality
+          description: Selected nationality
+          in: path
+          required: true
+          schema:
+            $ref: './person_api.yaml#/components/schemas/Country'
+
+        - name: eye-color
+          description: Selected eye color
+          in: path
+          required: true
+          schema:
+            $ref: './person_api.yaml#/components/schemas/EyeColor'
+
+      tags:
+        - Demography
+
+      responses:
+
+        '200':
+          description: Returns percent of matching people
+          content:
+            application/xml:
+              schema:
+                type: number
+                format: double
+                minimum: 0
+                maximum: 100
+                example: 25.5
+                xml:
+                  name: percentage
+
+        '400':
+          description: Invalid EyeColor or nationality
+          content:
+            application/xml:
+              schema:
+                type: object
+                xml:
+                  name: error
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                    xml:
+                      name: code
+                  message:
+                    type: string
+                    example: Invalid nationality or EyeColor
+                    xml:
+                      name: message
+
+        '500':
+          description: Internal Server Error.
+          content:
+            application/xml:
+              schema:
+                type: object
+                xml:
+                  name: error
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                    xml:
+                      name: code
+                  message:
+                    type: string
+                    example: An unexpected error occurred.
+                    xml:
+                      name: message
+        '503':
+          description: Service unavailable
+          content:
+            application/xml:
+              schema:
+                $ref: './person_api.yaml#/components/schemas/Error'
+              example:
+                code: 503
+                message: Service is temporarily unavailable

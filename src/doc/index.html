@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>API Documentation</title>
+
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/swagger-ui-dist@5.11.10/swagger-ui.css"
+    >
+
+    <style>
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h1 {
+            margin: 0 0 5px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #666;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-button {
+            padding: 12px 20px;
+            border: 0;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .tab-button.active {
+            color: #222;
+            border-bottom: 3px solid #4990e2;
+        }
+
+        .swagger-container {
+            display: none;
+        }
+
+        .swagger-container.active {
+            display: block;
+        }
+
+        .swagger-ui {
+            max-width: 1500px;
+            margin: auto;
+        }
+
+        .swagger-ui section.models,
+        .swagger-ui .model-box {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .swagger-ui .model-title,
+        .swagger-ui section.models h4 {
+            color: #222;
+        }
+
+        .swagger-ui .prop-type {
+            color: #176b9f;
+            font-weight: 600;
+        }
+
+        .swagger-ui .property {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>API Documentation</h1>
+    <p>People Collection Service & Demography Service</p>
+</div>
+
+<div class="tabs">
+    <button
+            class="tab-button active"
+            onclick="openTab('people', this)">
+        People API
+    </button>
+
+    <button
+            class="tab-button"
+            onclick="openTab('demography', this)">
+        Demography API
+    </button>
+</div>
+
+<div id="people" class="swagger-container active">
+    <div id="swagger-ui-people"></div>
+</div>
+
+<div id="demography" class="swagger-container">
+    <div id="swagger-ui-demography"></div>
+</div>
+
+<script src="https://unpkg.com/swagger-ui-dist@5.11.10/swagger-ui-bundle.js"></script>
+
+<script>
+
+    SwaggerUIBundle({
+        url: './person_api.yaml',
+        dom_id: '#swagger-ui-people',
+        deepLinking: true
+    });
+
+    SwaggerUIBundle({
+        url: './demography_api.yaml',
+        dom_id: '#swagger-ui-demography',
+        deepLinking: true
+    });
+
+    function openTab(tabName, button) {
+
+        document.querySelectorAll('.swagger-container')
+            .forEach(function (container) {
+                container.classList.remove('active');
+            });
+
+        document.querySelectorAll('.tab-button')
+            .forEach(function (button) {
+                button.classList.remove('active');
+            });
+
+        document.getElementById(tabName)
+            .classList.add('active');
+
+        button.classList.add('active');
+    }
+
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: 'https://localhost:21211/api/v1'
+  - url: 'https://se.ifmo.ru/~s409908/soa/lab1/api'
     description: Helios
 
 paths:
@@ -67,6 +67,15 @@ paths:
                     example: Invalid nationality or HairColor
                     xml:
                       name: message
+        '404':
+          description: Not Found - requested resource was not found.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Resource not found
 
         '500':
           description: Internal Server Error.
@@ -156,6 +165,15 @@ paths:
                     example: Invalid nationality or EyeColor
                     xml:
                       name: message
+        '404':
+          description: Not Found - requested resource was not found.
+          content:
+            application/xml:
+              schema:
+                $ref: './person_api.yaml#/components/schemas/Error'
+              example:
+                code: 404
+                message: Resource not found
 
         '500':
           description: Internal Server Error.

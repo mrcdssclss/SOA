@@ -40,7 +40,7 @@ paths:
         '200':
           description: Successfully found matching people
           content:
-            application/xml:
+            application/json:
               schema:
                 type: integer
                 format: int32
@@ -51,7 +51,7 @@ paths:
         '400':
           description: Invalid HairColor or nationality
           content:
-            application/xml:
+            application/json:
               schema:
                 type: object
                 xml:
@@ -70,7 +70,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: './person_api.yaml#/components/schemas/Error'
               example:
@@ -80,7 +80,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 type: object
                 xml:
@@ -99,7 +99,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: './person_api.yaml#/components/schemas/Error'
               example:
@@ -136,7 +136,7 @@ paths:
         '200':
           description: Returns percent of matching people
           content:
-            application/xml:
+            application/json:
               schema:
                 type: number
                 format: double
@@ -149,7 +149,7 @@ paths:
         '400':
           description: Invalid EyeColor or nationality
           content:
-            application/xml:
+            application/json:
               schema:
                 type: object
                 xml:
@@ -168,7 +168,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: './person_api.yaml#/components/schemas/Error'
               example:
@@ -178,7 +178,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 type: object
                 xml:
@@ -197,7 +197,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: './person_api.yaml#/components/schemas/Error'
               example:

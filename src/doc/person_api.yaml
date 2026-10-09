@@ -152,7 +152,7 @@ paths:
         '200':
           description: Returns list of people.
           content:
-            application/xml:
+            application/json:
               schema:
                 type: array
                 xml:
@@ -163,7 +163,7 @@ paths:
         '400':
           description: Bad Request - invalid parameter value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -172,7 +172,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -181,7 +181,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -190,7 +190,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -204,7 +204,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/xml:
+          application/json:
             schema:
               $ref: '#/components/schemas/Person'
       tags:
@@ -213,13 +213,13 @@ paths:
         '201':
           description: Person successfully created.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Person'
         '400':
           description: Bad Request - invalid parameter value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -228,7 +228,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -237,7 +237,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -246,7 +246,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -273,13 +273,13 @@ paths:
         '200':
           description: Returns person by ID.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Person'
         '400':
           description: Bad Request - invalid parameter value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -288,7 +288,7 @@ paths:
         '404':
           description: Object is not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -297,7 +297,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -306,7 +306,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -329,7 +329,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/xml:
+          application/json:
             schema:
               $ref: '#/components/schemas/Person'
       tags:
@@ -338,13 +338,13 @@ paths:
         '200':
           description: Person successfully updated.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Person'
         '400':
           description: Bad Request - invalid parameter value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -353,7 +353,7 @@ paths:
         '404':
           description: Object is not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -362,7 +362,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -371,7 +371,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -399,7 +399,7 @@ paths:
         '400':
           description: Bad Request - invalid parameter value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -408,7 +408,7 @@ paths:
         '404':
           description: Object is not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -417,7 +417,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -426,7 +426,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -444,13 +444,13 @@ paths:
         '200':
           description: Person with the maximum hair color value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Person'
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -459,7 +459,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -468,7 +468,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -487,25 +487,25 @@ paths:
           description: Hair color.
           in: query
           required: true
-          schema:
-            $ref: '#/components/schemas/HairColor'
 
       responses:
         '200':
-          description: Successfully found matching people.
-          content:
-            application/xml:
-              schema:
-                type: array
-                xml:
-                  name: people
-                  wrapped: true
-                items:
-                  $ref: '#/components/schemas/Person'
+        description: Successfully found matching people.
+        content:
+          application/json:
+            schema:
+              type: array
+              xml:
+                name: people
+                wrapped: true
+              items:
+                $ref: '#/components/schemas/Person'
+        schema:
+          $ref: '#/components/schemas/HairColor'
         '400':
           description: Bad Request - invalid hair color value.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -514,7 +514,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -523,7 +523,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -532,7 +532,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -550,7 +550,7 @@ paths:
         '200':
           description: Successfully grouped people by ID.
           content:
-            application/xml:
+            application/json:
               schema:
                 type: object
                 xml:
@@ -561,7 +561,7 @@ paths:
         '404':
           description: Not Found - requested resource was not found.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -570,7 +570,7 @@ paths:
         '500':
           description: Internal Server Error.
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
@@ -579,7 +579,7 @@ paths:
         '503':
           description: Service unavailable
           content:
-            application/xml:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               example:

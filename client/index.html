@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Люди — управление коллекцией</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+<header><h1>Люди</h1></header>
+<main>
+    <p id="save-notice" class="save-notice hidden" role="status" aria-live="polite"></p>
+    <section>
+        <h2>Список людей</h2>
+        <div class="query-toolbar">
+            <button id="toggle-filters" type="button" aria-expanded="false" aria-controls="filters-panel">Фильтры</button>
+            <button id="toggle-sorts" type="button" aria-expanded="false" aria-controls="sorts-panel">Сортировка</button>
+            <button id="apply-query" type="button">Применить</button>
+            <button id="clear-query" type="button">Сбросить</button>
+        </div>
+        <div id="filters-panel" class="query-panel hidden">
+            <div id="filters" class="rows"></div>
+            <button id="add-filter" type="button">Добавить фильтр</button>
+        </div>
+        <div id="sorts-panel" class="query-panel hidden">
+            <div id="sorts" class="rows"></div>
+            <button id="add-sort" type="button">Добавить поле сортировки</button>
+        </div>
+        <p id="list-message" class="message" role="status"></p>
+        <table><thead><tr><th>ID</th><th>Имя</th><th>Координаты</th><th>Дата создания</th><th>Рост</th><th>Цвет глаз</th><th>Цвет волос</th><th>Национальность</th><th>Местоположение</th><th>Действия</th></tr></thead><tbody id="people-table"></tbody></table>
+        <div class="pagination">
+            <button id="previous-page" type="button">Назад</button>
+            <span id="page-label">Страница 1</span>
+            <button id="next-page" type="button">Вперёд</button>
+            <label>Размер страницы <select id="page-size"><option>10</option><option selected>20</option><option>50</option><option>100</option></select></label>
+        </div>
+    </section>
+
+    <div class="two-columns">
+        <section>
+            <h2 id="person-form-title">Создать человека</h2>
+            <form id="person-form" novalidate>
+                <div class="form-grid">
+                    <div class="form-field"><label for="person-name">Имя</label><div class="field-control"><input id="person-name" name="name" aria-describedby="person-name-error" autocomplete="off"><span id="person-name-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-height">Рост</label><div class="field-control"><input id="person-height" name="height" inputmode="numeric" aria-describedby="person-height-error"><span id="person-height-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-coordinates-x">Координата X</label><div class="field-control"><input id="person-coordinates-x" name="coordinatesX" inputmode="text" aria-describedby="person-coordinates-x-error"><span id="person-coordinates-x-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-coordinates-y">Координата Y</label><div class="field-control"><input id="person-coordinates-y" name="coordinatesY" inputmode="decimal" aria-describedby="person-coordinates-y-error"><span id="person-coordinates-y-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-eye-color">Цвет глаз</label><div class="field-control"><select id="person-eye-color" name="eyeColor" aria-describedby="person-eye-color-error"></select><span id="person-eye-color-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-hair-color">Цвет волос</label><div class="field-control"><select id="person-hair-color" name="hairColor" aria-describedby="person-hair-color-error"></select><span id="person-hair-color-error" class="field-error"></span></div></div>
+                    <label>Национальность<select name="nationality"></select></label>
+                    <div class="form-field"><label for="person-location-x">Местоположение X</label><div class="field-control"><input id="person-location-x" name="locationX" inputmode="text" aria-describedby="person-location-x-error"><span id="person-location-x-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-location-y">Местоположение Y</label><div class="field-control"><input id="person-location-y" name="locationY" inputmode="decimal" aria-describedby="person-location-y-error"><span id="person-location-y-error" class="field-error"></span></div></div>
+                    <div class="form-field"><label for="person-location-z">Местоположение Z</label><div class="field-control"><input id="person-location-z" name="locationZ" inputmode="text" aria-describedby="person-location-z-error"><span id="person-location-z-error" class="field-error"></span></div></div>
+                </div>
+                <p class="hint">ID и дата создания задаются сервером. Национальность можно не выбирать.</p>
+                <div class="button-row"><button id="save-person" type="submit">Создать</button><button id="cancel-edit" class="hidden" type="button">Отменить редактирование</button></div>
+                <p id="form-message" class="message" role="status"></p>
+            </form>
+        </section>
+        <section>
+            <h2>Получить человека по ID</h2>
+            <form id="get-person-form" class="inline-form" novalidate><div class="form-field"><label for="person-id">ID</label><div class="field-control"><input id="person-id" name="id" inputmode="numeric" aria-describedby="person-id-error"><span id="person-id-error" class="field-error"></span></div></div><button type="submit">Получить</button></form>
+            <p id="get-person-message" class="message" role="status"></p>
+            <div id="person-result"></div>
+        </section>
+    </div>
+
+    <section>
+        <h2>Дополнительные операции</h2>
+        <div class="operation-grid">
+            <article><h3>Минимальный eyeColor</h3><button data-operation="eye-color-min">Получить человека</button><div id="eye-color-min-result" class="operation-result"></div></article>
+            <article><h3>Максимальный ID</h3><button data-operation="id-max">Получить человека</button><div id="id-max-result" class="operation-result"></div></article>
+            <article><h3>Количество с eyeColor больше</h3><form id="greater-form" novalidate><div class="form-field"><label for="greater-color">Цвет</label><div class="field-control"><select id="greater-color" name="color" aria-describedby="greater-color-error"></select><span id="greater-color-error" class="field-error"></span></div></div><button type="submit">Посчитать</button></form><div id="greater-result" class="operation-result"></div></article>
+            <article><h3>Процент по цвету волос</h3><form id="hair-percent-form" novalidate><div class="form-field"><label for="hair-percent-color">Цвет</label><div class="field-control"><select id="hair-percent-color" name="color" aria-describedby="hair-percent-color-error"></select><span id="hair-percent-color-error" class="field-error"></span></div></div><button type="submit">Посчитать</button></form><div id="hair-percent-result" class="operation-result"></div></article>
+            <article><h3>Процент по цвету глаз</h3><form id="eye-percent-form" novalidate><div class="form-field"><label for="eye-percent-color">Цвет</label><div class="field-control"><select id="eye-percent-color" name="color" aria-describedby="eye-percent-color-error"></select><span id="eye-percent-color-error" class="field-error"></span></div></div><button type="submit">Посчитать</button></form><div id="eye-percent-result" class="operation-result"></div></article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -7,8 +7,6 @@ import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.container.PreMatching;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 
@@ -18,11 +16,8 @@ import java.io.IOException;
 @PreMatching
 @Priority(Priorities.AUTHORIZATION)
 public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilter {
-    private static final String ALLOWED_ORIGIN = System.getProperty(
-            "client.allowed.origin", "https://localhost:8443");
-
-    @Context
-    private HttpHeaders headers;
+    private static final String LOCAL_ORIGIN = "https://localhost:28443";
+    private static final String HELIOS_ORIGIN = "https://helios.cs.ifmo.ru:28443";
 
     @Override
     public void filter(ContainerRequestContext request) throws IOException {
@@ -33,8 +28,10 @@ public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilt
 
     @Override
     public void filter(ContainerRequestContext request, ContainerResponseContext response) throws IOException {
-        if (ALLOWED_ORIGIN.equals(headers.getHeaderString("Origin"))) {
-            response.getHeaders().putSingle("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+        String origin = request.getHeaderString("Origin");
+
+        if (LOCAL_ORIGIN.equals(origin) || HELIOS_ORIGIN.equals(origin)) {
+            response.getHeaders().putSingle("Access-Control-Allow-Origin", origin);
             response.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type, Accept");
             response.getHeaders().putSingle("Access-Control-Max-Age", "600");

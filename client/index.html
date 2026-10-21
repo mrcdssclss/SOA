@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Люди — управление коллекцией</title>
+    <title>People service</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
     <script src="app.js" defer></script>
@@ -54,7 +54,6 @@
                     <div class="form-field"><label for="person-location-y">Местоположение Y</label><div class="field-control"><input id="person-location-y" name="locationY" inputmode="decimal" aria-describedby="person-location-y-error"><span id="person-location-y-error" class="field-error"></span></div></div>
                     <div class="form-field"><label for="person-location-z">Местоположение Z</label><div class="field-control"><input id="person-location-z" name="locationZ" inputmode="text" aria-describedby="person-location-z-error"><span id="person-location-z-error" class="field-error"></span></div></div>
                 </div>
-                <p class="hint">ID и дата создания задаются сервером. Национальность можно не выбирать.</p>
                 <div class="button-row"><button id="save-person" type="submit">Создать</button><button id="cancel-edit" class="hidden" type="button">Отменить редактирование</button></div>
                 <p id="form-message" class="message" role="status"></p>
             </form>
